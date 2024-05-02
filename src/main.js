@@ -21,6 +21,29 @@ let geometry = new THREE.TorusKnotGeometry(9, 4, 75, 10);
 init();
 animate();
 
+const property = {
+  color: 0x0000ff,
+  wireframe: true,
+  vertexColors: false,
+  fog: true,
+  flatShading: true,
+  emissive: 0x0000ff,
+  roughness: 0.3,
+  metalness: 0.4,
+  ior: 1.5,
+  reflectivity: 0.5,
+  refractionRatio: 0.8,
+  iridescence: 0.3,
+  iridescenceIOR: 1.4,
+  sheen: 0,
+  sheenColor: 0x0000ff,
+  clearcoat: 0,
+  clearcoatRoughness: 0,
+  specularIntensity: 1,
+  specularColor: 0x0000ff,
+  control_property: false,
+};
+
 function init() {
   container = document.createElement("div");
   document.body.appendChild(container);
@@ -95,6 +118,44 @@ for (var i = 0; i < acc.length; i++) {
   });
 }
 
+var basic = document.getElementsByClassName("basic");
+basic[0].addEventListener("click", function () {
+  scene.traverse(function (mesh) {
+    const material = new MeshBasicMaterial({
+      color: property.color,
+      wireframe: property.wireframe,
+      vertexColors: property.vertexColors,
+      fog: property.fog,
+      // envMaps: reflection,
+      // map: bricks,
+      // alphaMap: fibers,
+      // combine: THREE.MultiplyOperation,
+      reflectivity: property.reflectivity,
+      refractionRatio: property.refractionRatio,
+    });
+    mesh.material = material;
+  });
+});
+
+var lambert = document.getElementsByClassName("lambert");
+lambert[0].addEventListener("click", function () {
+  scene.traverse(function (mesh) {
+    const material = new MeshLambertMaterial({
+      color: property.color,
+      wireframe: property.wireframe,
+      vertexColors: property.vertexColors,
+      fog: property.fog,
+      // envMaps: reflection,
+      // map: bricks,
+      // alphaMap: fibers,
+      // combine: THREE.MultiplyOperation,
+      reflectivity: property.reflectivity,
+      refractionRatio: property.refractionRatio,
+    });
+    mesh.material = material;
+  });
+});
+
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -119,6 +180,8 @@ function animate() {
 
   stats.end();
 }
+
+//
 
 // const reflection = textureLoader.load("/texture/px.jpg");
 // const reflectivity = textureLoader.load("/texture/nz.jpg");

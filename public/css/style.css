@@ -263,6 +263,11 @@ body {
   width: 145px;
 }
 
+.load_title {
+  color: rgb(42, 43, 43);
+  font-size: 15px;
+}
+
 .map {
   position: relative;
   border: none;
