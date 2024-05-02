@@ -119,7 +119,6 @@ body {
   position: relative;
   color: rgb(108, 110, 112);
   font-size: 20px;
-  left: 20px;
   top: -18px;
 }
 
@@ -195,7 +194,6 @@ body {
 
 .option {
   margin-top: 3px;
-  margin-left: 20px;
   color: rgb(108, 110, 112);
   font-size: 20px;
 }
@@ -260,7 +258,10 @@ body {
 }
 
 .texture_upload {
-  width: 145px;
+  display: flex;
+  align-items: center;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
 }
 
 .load_title {
@@ -350,7 +351,6 @@ body {
   position: relative;
   color: rgb(108, 110, 112);
   font-size: 20px;
-  left: 20px;
 }
 
 .reflectivity input {
@@ -667,7 +667,6 @@ body {
   position: relative;
   color: rgb(108, 110, 112);
   font-size: 20px;
-  left: 20px;
   top: -25px;
 }
 
@@ -695,6 +694,7 @@ body {
   overflow: hidden;
   position: relative;
   margin-top: -20px;
+  margin-left: 20px;
 }
 
 .alpahTest {
