@@ -23,7 +23,7 @@ animate();
 
 const property = {
   color: 0x0000ff,
-  wireframe: true,
+  wireframe: false,
   vertexColors: false,
   fog: true,
   flatShading: true,
@@ -118,43 +118,55 @@ for (var i = 0; i < acc.length; i++) {
   });
 }
 
-var basic = document.getElementsByClassName("basic");
-basic[0].addEventListener("click", function () {
+var physical = document.getElementsByClassName("physical");
+physical[0].addEventListener("click", function () {
   scene.traverse(function (mesh) {
-    const material = new MeshBasicMaterial({
+    const material = new MeshPhysicalMaterial({
       color: property.color,
       wireframe: property.wireframe,
       vertexColors: property.vertexColors,
       fog: property.fog,
+      emissive: property.emissive,
+      metalness: property.metalness,
+      ior: property.ior,
+      reflectivity: property.reflectivity,
+      iridescence: property.iridescence,
+      iridescenceIOR: property.iridescenceIOR,
+      sheen: property.sheen,
+      sheenRoughness: property.sheenRoughness,
+      sheenColor: property.sheenColor,
+      clearcoat: property.clearcoat,
+      clearcoatRoughness: property.clearcoatRoughness,
+      specularColor: property.specularColor,
+      flatShading: property.flatShading,
+
       // envMaps: reflection,
       // map: bricks,
       // alphaMap: fibers,
       // combine: THREE.MultiplyOperation,
-      reflectivity: property.reflectivity,
-      refractionRatio: property.refractionRatio,
     });
     mesh.material = material;
   });
 });
 
-var lambert = document.getElementsByClassName("lambert");
-lambert[0].addEventListener("click", function () {
-  scene.traverse(function (mesh) {
-    const material = new MeshLambertMaterial({
-      color: property.color,
-      wireframe: property.wireframe,
-      vertexColors: property.vertexColors,
-      fog: property.fog,
-      // envMaps: reflection,
-      // map: bricks,
-      // alphaMap: fibers,
-      // combine: THREE.MultiplyOperation,
-      reflectivity: property.reflectivity,
-      refractionRatio: property.refractionRatio,
-    });
-    mesh.material = material;
-  });
-});
+// var lambert = document.getElementsByClassName("lambert");
+// lambert[0].addEventListener("click", function () {
+//   scene.traverse(function (mesh) {
+//     const material = new MeshLambertMaterial({
+//       color: property.color,
+//       wireframe: property.wireframe,
+//       vertexColors: property.vertexColors,
+//       fog: property.fog,
+//       // envMaps: reflection,
+//       // map: bricks,
+//       // alphaMap: fibers,
+//       // combine: THREE.MultiplyOperation,
+//       reflectivity: property.reflectivity,
+//       refractionRatio: property.refractionRatio,
+//     });
+//     mesh.material = material;
+//   });
+// });
 
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
