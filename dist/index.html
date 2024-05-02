@@ -1,0 +1,836 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Materials</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0"
+    />
+    <link type="text/css" rel="stylesheet" href="/css/style.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "../build/three.module.js",
+          "three/addons/": "./jsm/"
+        }
+      }
+    </script>
+    <script type="module" crossorigin src="/assets/index-CjbAtwKP.js"></script>
+  </head>
+
+  <body>
+
+    <div>
+      <button class="heading dropdown">
+        <p class="title">Materials Effect</p>
+      </button>
+      <div id="myDropdown" class="dropdown-content">
+        <div class="set_value">
+          <div id="THREE_Material">
+            <button class="materials drptbasic">
+              THREE.Material
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+            <div class="panel">
+              <div class="option">
+                transparent
+                <input type="checkbox" id="transparent" class="transparent" />
+              </div>
+
+              <div class="opacity">
+                <p>opacity</p>
+                <input
+                  type="number"
+                  id="opacity"
+                  value="1"
+                  class="opacity_input"
+                />
+              </div>
+
+              <div class="option">
+                depthTest
+                <input
+                  type="checkbox"
+                  id="depthTest"
+                  checked
+                  class="depthTest"
+                />
+              </div>
+
+              <div class="option">
+                depthWrite
+                <input
+                  type="checkbox"
+                  id="depthWrite"
+                  checked
+                  class="depthWrite"
+                />
+              </div>
+
+              <div class="alpahTest">
+                <p>alpahTest</p>
+                <input
+                  type="number"
+                  id="alpahTest"
+                  value="0"
+                  class="alphaTest_input"
+                />
+              </div>
+
+              <div class="option">
+                alphaHash
+                <input type="checkbox" id="alphaHash" class="alphaHash" />
+              </div>
+
+              <div class="option">
+                visible
+                <input type="checkbox" id="visible" checked class="visible" />
+              </div>
+
+              <div class="option">
+                side
+                <select class="side">
+                  <option value="" class="FrontSide">THREE.FrontSide</option>
+                  <option value="" class="BackSide">THREE.BackSide</option>
+                  <option value="" class="DoubleSide">THREE.DoubleSide</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshBasicMaterial">
+            <button class="materials drptbasic basic">
+              MeshBasicMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+            <div class="panel">
+              <div class="color">
+                <p>color</p>
+                <input type="color" class="material_color" />
+              </div>
+
+              <div class="option">
+                wireframe
+                <input
+                  type="checkbox"
+                  id="wireframe"
+                  checked
+                  class="wireframe"
+                />
+              </div>
+
+              <div class="option">
+                vertexColors
+                <input
+                  type="checkbox"
+                  id="vertexColors"
+                  checked
+                  class="vertexColors"
+                />
+              </div>
+
+              <div class="option">
+                fog
+                <input type="checkbox" id="fog" checked class="fog" />
+              </div>
+
+              <div class="option">
+                envMaps
+                <select class="envmap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="reflection">reflection</option>
+                  <option value="" class="refrection">refrection</option>
+                </select>
+              </div>
+
+              <div class="option">
+                map
+                <select class="map">
+                  <option value="" class="none">none</option>
+                  <option value="" class="bricks">bricks</option>
+                </select>
+              </div>
+
+              <div class="option">
+                alphaMap
+                <select class="alphamap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="fibers">fibers</option>
+                </select>
+              </div>
+
+              <div class="option">
+                combine
+                <select class="combine">
+                  <option value="" class="Multiply">
+                    THREE.MultiplyOperation
+                  </option>
+                  <option value="" class="Mix">THREE.MixOperation</option>
+                  <option value="" class="Add">THREE.AddOperation</option>
+                </select>
+              </div>
+
+              <div class="reflectivity">
+                <p>reflectivity</p>
+                <input
+                  type="number"
+                  id="reflectivity"
+                  value="1"
+                  class="reflectivity_input"
+                />
+              </div>
+
+              <div class="refractionRatio">
+                <p>refractionRatio</p>
+                <input
+                  type="number"
+                  id="refractionRatio"
+                  value="0.794"
+                  class="refractionRatio_input"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshDepthMaterial">
+            <button class="materials drptbasic depth">
+              MeshDepthMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+            <div class="panel">
+              <div class="option">
+                wireframe
+                <input
+                  type="checkbox"
+                  id="wireframe"
+                  checked
+                  class="wireframe"
+                />
+              </div>
+
+              <div class="option">
+                alphaMap
+                <select class="alphamap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="fibers">fibers</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshLamberMaterial">
+            <button class="materials drptbasic lambert">
+              MeshLamberMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+            <div class="panel">
+              <div class="color">
+                <p>color</p>
+                <input type="color" class="material_color" />
+              </div>
+
+              <div class="emissive">
+                <p>emissive</p>
+                <input type="color" class="emissive_color" />
+              </div>
+
+              <div class="option">
+                wireframe
+                <input
+                  type="checkbox"
+                  id="wireframe"
+                  checked
+                  class="wireframe"
+                />
+              </div>
+
+              <div class="option">
+                vertexColors
+                <input
+                  type="checkbox"
+                  id="vertexColors"
+                  checked
+                  class="vertexColors"
+                />
+              </div>
+
+              <div class="option">
+                fog
+                <input type="checkbox" id="fog" checked class="fog" />
+              </div>
+
+              <div class="option">
+                envMaps
+                <select class="envmap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="reflection">reflection</option>
+                  <option value="" class="refrection">refrection</option>
+                </select>
+              </div>
+
+              <div class="option">
+                Map
+                <select class="map">
+                  <option value="" class="none">none</option>
+                  <option value="" class="bricks">bricks</option>
+                </select>
+              </div>
+
+              <div class="option">
+                alphaMap
+                <select class="alphamap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="fibers">fibers</option>
+                </select>
+              </div>
+
+              <div class="option">
+                combine
+                <select class="combine">
+                  <option value="" class="Multiply">
+                    THREE.MultiplyOperation
+                  </option>
+                  <option value="" class="Mix">THREE.MixOperation</option>
+                  <option value="" class="Add">THREE.AddOperation</option>
+                </select>
+              </div>
+
+              <div class="reflectivity">
+                <p>reflectivity</p>
+                <input
+                  type="number"
+                  id="reflectivity"
+                  checked
+                  class="reflectivity_input"
+                />
+              </div>
+
+              <div class="refractionRatio">
+                <p>refractionRatio</p>
+                <input
+                  type="number"
+                  id="refractionRatio"
+                  checked
+                  class="refractionRatio_input"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshMatcapMaterial">
+            <button class="materials drptbasic matcap">
+              MeshMatcapMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+            <div class="panel">
+              <div class="color">
+                <p>color</p>
+                <input type="color" class="material_color" />
+              </div>
+
+              <div class="option">
+                flatShading
+                <input
+                  type="checkbox"
+                  id="flatShading"
+                  checked
+                  class="flatShading"
+                />
+              </div>
+
+              <div class="option">
+                matcap
+                <select class="combine">
+                  <option value="" class="Mix">none</option>
+                  <option value="" class="Add">porcelainWhite</option>
+                </select>
+              </div>
+
+              <div class="option">
+                alphaMap
+                <select class="alphamap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="fibers">fibers</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshNormalMaterial">
+            <button class="materials drptbasic normal">
+              MeshNormalMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+            <div class="panel">
+              <div class="option">
+                flatShading
+                <input
+                  type="checkbox"
+                  id="flatShading"
+                  checked
+                  class="flatShading"
+                />
+              </div>
+              <div class="option">
+                wireframe
+                <input
+                  type="checkbox"
+                  id="wireframe"
+                  checked
+                  class="wireframe"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshPhongMaterial">
+            <button class="materials drptbasic phong">
+              MeshPhongMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+            <div class="panel">
+              <div class="color">
+                <p>color</p>
+                <input type="color" class="material_color" />
+              </div>
+
+              <div class="emissive">
+                <p>emissive</p>
+                <input type="color" class="emissive_color" />
+              </div>
+
+              <div class="specular">
+                <p>specular</p>
+                <input type="color" class="specular_color" />
+              </div>
+
+              <div class="shininess">
+                <p>shininess</p>
+                <input type="color" class="shininess_color" />
+              </div>
+
+              <div class="option">
+                flatShading
+                <input
+                  type="checkbox"
+                  id="flatShading"
+                  checked
+                  class="flatShading"
+                />
+              </div>
+
+              <div class="option">
+                wireframe
+                <input
+                  type="checkbox"
+                  id="wireframe"
+                  checked
+                  class="wireframe"
+                />
+              </div>
+
+              <div class="option">
+                vertexColors
+                <input
+                  type="checkbox"
+                  id="vertexColors"
+                  checked
+                  class="vertexColors"
+                />
+              </div>
+
+              <div class="option">
+                fog
+                <input type="checkbox" id="fog" checked class="fog" />
+              </div>
+
+              <div class="option">
+                envMaps
+                <select class="envmap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="reflection">reflection</option>
+                  <option value="" class="refrection">refrection</option>
+                </select>
+              </div>
+
+              <div class="option">
+                Map
+                <select class="map">
+                  <option value="" class="none">none</option>
+                  <option value="" class="bricks">bricks</option>
+                </select>
+              </div>
+
+              <div class="option">
+                alphaMap
+                <select class="alphamap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="fibers">fibers</option>
+                </select>
+              </div>
+
+              <div class="option">
+                combine
+                <select class="combine">
+                  <option value="" class="Multiply">
+                    THREE.MultiplyOperation
+                  </option>
+                  <option value="" class="Mix">THREE.MixOperation</option>
+                  <option value="" class="Add">THREE.AddOperation</option>
+                </select>
+              </div>
+
+              <div class="reflectivity">
+                <p>reflectivity</p>
+                <input
+                  type="number"
+                  id="reflectivity"
+                  checked
+                  class="reflectivity_input"
+                />
+              </div>
+
+              <div class="refractionRatio">
+                <p>refractionRatio</p>
+                <input
+                  type="number"
+                  id="refractionRatio"
+                  checked
+                  class="refractionRatio_input"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshPhysicalMaterial">
+            <button class="materials drptbasic physical">
+              MeshPhysicalMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+            <div class="panel">
+              <div class="color">
+                <p>color</p>
+                <input type="color" class="material_color" />
+              </div>
+
+              <div class="emissive">
+                <p>emissive</p>
+                <input type="color" class="emissive_color" />
+              </div>
+
+              <div class="roughness">
+                <p>roughness</p>
+                <input type="number" class="roughness_input" />
+              </div>
+
+              <div class="metalness">
+                <p>metalness</p>
+                <input type="number" class="metalness_input" />
+              </div>
+
+              <div class="ior">
+                <p>ior</p>
+                <input type="number" class="ior_input" />
+              </div>
+
+              <div class="reflectivity">
+                <p>reflectivity</p>
+                <input
+                  type="number"
+                  id="reflectivity"
+                  class="reflectivity_input"
+                />
+              </div>
+
+              <div class="iridescene">
+                <p>iridescene</p>
+                <input type="number" id="iridescene" class="iridescene_input" />
+              </div>
+
+              <div class="iridesceneIOR">
+                <p>iridesceneIOR</p>
+                <input
+                  type="number"
+                  id="iridesceneIOR"
+                  class="iridesceneIOR_input"
+                />
+              </div>
+
+              <div class="sheen">
+                <p>sheen</p>
+                <input type="number" id="sheen" class="sheen_input" />
+              </div>
+
+              <div class="sheenRoughness">
+                <p>sheenRoughness</p>
+                <input
+                  type="number"
+                  id="sheenRoughness"
+                  class="sheenRoughness_input"
+                />
+              </div>
+
+              <div class="sheenColor">
+                <p>sheenColor</p>
+                <input type="color" id="sheenColor" class="sheenColor_input" />
+              </div>
+
+              <div class="clearcoat">
+                <p>clearcoat</p>
+                <input type="number" id="clearcoat" class="clearcoat_input" />
+              </div>
+
+              <div class="clearcoatRoughness">
+                <p>clearcoatRoughness</p>
+                <input
+                  type="number"
+                  id="clearcoatRoughness"
+                  class="clearcoatRoughness_input"
+                />
+              </div>
+
+              <div class="specularintensity">
+                <p>specularintensity</p>
+                <input
+                  type="number"
+                  id="specularintensity"
+                  class="specularintensity_input"
+                />
+              </div>
+
+              <div class="specularColor">
+                <p>specularColor</p>
+                <input
+                  type="color"
+                  id="specularColor"
+                  class="specularColor_input"
+                />
+              </div>
+
+              <div class="option">
+                flatShading
+                <input
+                  type="checkbox"
+                  id="flatShading"
+                  checked
+                  class="flatShading"
+                />
+              </div>
+
+              <div class="option">
+                wireframe
+                <input
+                  type="checkbox"
+                  id="wireframe"
+                  checked
+                  class="wireframe"
+                />
+              </div>
+
+              <div class="option">
+                vertexColors
+                <input
+                  type="checkbox"
+                  id="vertexColors"
+                  checked
+                  class="vertexColors"
+                />
+              </div>
+
+              <div class="option">
+                fog
+                <input type="checkbox" id="fog" checked class="fog" />
+              </div>
+
+              <div class="option">
+                envMaps
+                <select class="envmap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="reflection">reflection</option>
+                  <option value="" class="refrection">refrection</option>
+                </select>
+              </div>
+
+              <div class="option">
+                Map
+                <select class="map">
+                  <option value="" class="none">none</option>
+                  <option value="" class="bricks">bricks</option>
+                </select>
+              </div>
+
+              <div class="option">
+                roughnessMap
+                <select class="roughnessMap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="bricks">bricks</option>
+                </select>
+              </div>
+
+              <div class="option">
+                alphaMap
+                <select class="alphamap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="fibers">fibers</option>
+                </select>
+              </div>
+
+              <div class="option">
+                metalnessMap
+                <select class="metalnessMap">
+                  <option value="">none</option>
+                  <option value="" id="fibers">fibers</option>
+                </select>
+              </div>
+
+              <div class="option">
+                iridesceneMap
+                <select class="iridesceneMap">
+                  <option value="">none</option>
+                  <option value="" id="fibers">fibers</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshStandardMaterial">
+            <button class="materials drptbasic standard">
+              MeshStandardMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+
+            <div class="panel">
+              <div class="color">
+                <p>color</p>
+                <input type="color" class="material_color" />
+              </div>
+
+              <div class="emissive">
+                <p>emissive</p>
+                <input type="color" class="emissive_color" />
+              </div>
+
+              <div class="roughness">
+                <p>roughness</p>
+                <input type="number" class="roughness_input" />
+              </div>
+
+              <div class="metalness">
+                <p>metalness</p>
+                <input type="number" class="metalness_input" />
+              </div>
+
+              <div class="option">
+                flatShading
+                <input
+                  type="checkbox"
+                  id="flatShading"
+                  checked
+                  class="flatShading"
+                />
+              </div>
+
+              <div class="option">
+                wireframe
+                <input
+                  type="checkbox"
+                  id="wireframe"
+                  checked
+                  class="wireframe"
+                />
+              </div>
+
+              <div class="option">
+                vertexColors
+                <input
+                  type="checkbox"
+                  id="vertexColors"
+                  checked
+                  class="vertexColors"
+                />
+              </div>
+
+              <div class="option">
+                fog
+                <input type="checkbox" id="fog" checked class="fog" />
+              </div>
+
+              <div class="option">
+                envMaps
+                <select class="envmap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="reflection">reflection</option>
+                  <option value="" class="refrection">refrection</option>
+                </select>
+              </div>
+
+              <div class="option">
+                Map
+                <select class="map">
+                  <option value="" class="none">none</option>
+                  <option value="" class="bricks">bricks</option>
+                </select>
+              </div>
+
+              <div class="option">
+                roughnessMap
+                <select class="roughnessMap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="bricks">bricks</option>
+                </select>
+              </div>
+
+              <div class="option">
+                alphaMap
+                <select class="alphamap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="fibers">fibers</option>
+                </select>
+              </div>
+
+              <div class="option">
+                metalnessMap
+                <select class="metalnessMap">
+                  <option value="">none</option>
+                  <option value="" id="fibers">fibers</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="MeshToonMaterial">
+            <button class="materials drptbasic toon">
+              MeshToonMaterial
+              <img src="/img/icon.jpg" alt="icon" class="drpt_btn" />
+            </button>
+
+            <div class="panel final">
+              <div class="color">
+                <p>color</p>
+                <input type="color" class="material_color" />
+              </div>
+
+              <div class="option">
+                Map
+                <select class="map">
+                  <option value="" class="none">none</option>
+                  <option value="" class="bricks">bricks</option>
+                </select>
+              </div>
+
+              <div class="option">
+                gradientMap
+                <select class="gradientMap">
+                  <option value="" class="none">none</option>
+                  <option value="" class="threeTone">threeTone</option>
+                  <option value="" class="fiveTone">fiveTone</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

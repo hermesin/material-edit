@@ -1,0 +1,744 @@
+body {
+  margin: 0px;
+  overflow: hidden;
+}
+
+.heading {
+  position: absolute;
+  top: 40px;
+  right: 20px;
+  width: 290px;
+  border: none;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  height: 55px;
+  background-color: #8fee88;
+  cursor: pointer;
+}
+
+.title {
+  font-family: "Franklin Gothic Medium";
+  margin-top: 15px;
+  letter-spacing: 1px;
+  text-align: center;
+  font-size: 20px;
+  color: rgb(42, 43, 43);
+  font-weight: 600;
+}
+
+.set_value {
+  display: block;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 290px;
+  height: 85%;
+  background-color: #262c38;
+  position: absolute;
+  right: 20px;
+  top: 95px;
+}
+
+.set_value::-webkit-scrollbar {
+  width: 8px;
+}
+
+.set_value::-webkit-scrollbar-track {
+  background: #262c38;
+}
+
+.set_value::-webkit-scrollbar-thumb {
+  background: #57576b;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+.set_value::-webkit-scrollbar-thumb:hover {
+  background: #28283a;
+}
+
+.drpt_btn {
+  cursor: pointer;
+  width: 12px;
+  position: absolute;
+  left: 250px;
+  top: 25px;
+}
+
+.drpt_btn:hover {
+  width: 15px;
+}
+
+.show {
+  display: block !important;
+}
+
+.dropdown-content {
+  display: none;
+}
+
+.materials {
+  color: white;
+  font-size: 20px;
+  border: none;
+  position: relative;
+  width: 290px;
+  height: 60px;
+  background-color: #262c38;
+  cursor: pointer;
+}
+
+.material_name {
+  font-family: "Times New Roman", Times, serif;
+  letter-spacing: 1px;
+  text-align: center;
+  font-size: 25px;
+  color: rgb(108, 110, 112);
+  position: absolute;
+  left: 35px;
+  /* font-size: 25px;
+  color: white;
+  font-family: "Times New Roman", Times, serif; */
+}
+
+.property {
+  position: relative;
+  top: -20px;
+  width: 290px;
+  height: 368px;
+  background-color: #262c38;
+  border: none;
+}
+
+.color {
+  position: relative;
+  display: flex;
+  top: 35px;
+}
+
+.color p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+  top: -18px;
+}
+
+.color input {
+  position: relative;
+  border: none;
+  left: 40px;
+  width: 180px;
+}
+
+.emissive {
+  position: relative;
+  display: flex;
+  top: 15px;
+}
+
+.emissive p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+  top: -18px;
+}
+
+.emissive input {
+  position: relative;
+  border: none;
+  left: 40px;
+  width: 150px;
+}
+
+.specular {
+  position: relative;
+  display: flex;
+  top: 15px;
+}
+
+.specular p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+  top: -18px;
+}
+
+.specular input {
+  position: relative;
+  border: none;
+  left: 40px;
+  width: 150px;
+}
+
+.shininess {
+  position: relative;
+  display: flex;
+  top: 15px;
+}
+
+.shininess p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+  top: -18px;
+}
+
+.shininess input {
+  position: relative;
+  border: none;
+  left: 40px;
+  width: 150px;
+}
+
+.option {
+  margin-top: 3px;
+  margin-left: 20px;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+}
+
+.option input {
+  position: relative;
+  left: 35px;
+  width: 20px;
+  height: 20px;
+}
+
+.transparent {
+  position: inherit;
+  margin-left: -3px;
+}
+
+.opacity {
+  display: flex;
+  position: relative;
+  top: -10px;
+}
+
+.opacity p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.opacity input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 40px;
+  top: 23px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 165px;
+}
+
+.vertexColors {
+  position: inherit;
+  margin-left: -12px;
+}
+
+.fog {
+  position: inherit;
+  margin-left: 65px;
+}
+
+.envmap {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 10px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 165px;
+}
+
+.map {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 46px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 165px;
+}
+
+.gradientMap {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 3px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 128px;
+}
+
+.alphamap {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 3px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 165px;
+}
+
+.roughnessMap {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 3px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 125px;
+}
+
+.iridesceneMap {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 3px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 125px;
+}
+
+.metalnessMap {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 3px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 128px;
+}
+
+.reflectivity {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.reflectivity p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.reflectivity input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.roughness {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.roughness p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.roughness input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.metalness {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.metalness p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.metalness input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.ior {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.ior p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.ior input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.iridescene {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.iridescene p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.iridescene input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.iridesceneIOR {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.iridesceneIOR p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.iridesceneIOR input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.sheen {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.sheen p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.sheen input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.sheenRoughness {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.sheenRoughness p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.sheenRoughness input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.sheenColor {
+  position: relative;
+  display: flex;
+  top: 15px;
+}
+
+.sheenColor p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+  top: -18px;
+}
+
+.sheenColor input {
+  position: relative;
+  border: none;
+  left: 40px;
+  width: 150px;
+}
+
+.clearcoat {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.clearcoat p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.clearcoat input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.clearcoatRoughness {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.clearcoatRoughness p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.clearcoatRoughness input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 85px;
+}
+
+.specularintensity {
+  display: flex;
+  position: relative;
+  top: -5px;
+}
+
+.specularintensity p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+}
+
+.specularintensity input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: 18px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 85px;
+}
+
+.specularColor {
+  position: relative;
+  display: flex;
+  top: 15px;
+}
+
+.specularColor p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+  top: -18px;
+}
+
+.specularColor input {
+  position: relative;
+  border: none;
+  left: 40px;
+  width: 120px;
+}
+
+.refractionRatio {
+  display: flex;
+  position: inherit;
+  top: -5px;
+}
+
+.refractionRatio p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+  top: -25px;
+}
+
+.refractionRatio input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 25px;
+  top: -5px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 130px;
+}
+
+.depthWrite {
+  margin-left: -8px;
+}
+
+.visible {
+  margin-left: 35px;
+}
+.panel {
+  display: none;
+  overflow: hidden;
+  position: relative;
+  margin-top: -20px;
+}
+
+.alpahTest {
+  display: flex;
+  position: inherit;
+  top: -5px;
+}
+
+.alpahTest p {
+  position: relative;
+  color: rgb(108, 110, 112);
+  font-size: 20px;
+  left: 20px;
+  top: 0px;
+}
+
+.alphaTest_input {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 30px;
+  top: 20px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 158px;
+}
+
+.side {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 50px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 165px;
+}
+
+.combine {
+  position: relative;
+  border: none;
+  text-align: center;
+  left: 20px;
+  letter-spacing: 2px;
+  color: rgb(108, 110, 112);
+  background-color: #2f3543;
+  height: 20px;
+  width: 165px;
+}
+
+.final {
+  margin-top: -20px;
+  margin-bottom: 40px;
+}
