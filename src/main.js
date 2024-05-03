@@ -1,5 +1,6 @@
 import * as THREE from "three";
 import {
+  DoubleSide,
   MeshBasicMaterial,
   MeshDepthMaterial,
   MeshLambertMaterial,
@@ -20,29 +21,6 @@ let stats, container, controls;
 let geometry = new THREE.TorusKnotGeometry(9, 4, 75, 10);
 init();
 animate();
-
-const property = {
-  color: 0x0000ff,
-  wireframe: false,
-  vertexColors: false,
-  fog: true,
-  flatShading: true,
-  emissive: 0x0000ff,
-  roughness: 0.3,
-  metalness: 0.4,
-  ior: 1.5,
-  reflectivity: 0.5,
-  refractionRatio: 0.8,
-  iridescence: 0.3,
-  iridescenceIOR: 1.4,
-  sheen: 0,
-  sheenColor: 0x0000ff,
-  clearcoat: 0,
-  clearcoatRoughness: 0,
-  specularIntensity: 1,
-  specularColor: 0x0000ff,
-  control_property: false,
-};
 
 function init() {
   container = document.createElement("div");
@@ -87,9 +65,6 @@ function init() {
 }
 
 const textureLoader = new THREE.TextureLoader();
-const porcelainWhite = textureLoader.load(
-  "/texture/matcap-porcelain-white.jpg"
-);
 
 var dropbtn = document.getElementsByClassName("dropdown");
 dropbtn[0].addEventListener("click", function () {
@@ -105,69 +80,274 @@ dropbtn[0].addEventListener("click", function () {
   }
 });
 
-var acc = document.getElementsByClassName("drptbasic");
-for (var i = 0; i < acc.length; i++) {
-  acc[i].addEventListener("click", function () {
-    this.classList.toggle("active");
-    var panel = this.nextElementSibling;
-    if (panel.style.display === "block") {
-      panel.style.display = "none";
-    } else {
-      panel.style.display = "block";
-    }
+window.setType = function (event) {
+  const type_effect = document.querySelector("#material_buttons");
+
+  type_effect.querySelectorAll("button").forEach((button) => {
+    button.style.backgroundColor = null;
   });
-}
+  const clickedButton = event.target.closest("button");
+  clickedButton.style.backgroundColor = "#3300cc";
+};
 
-var physical = document.getElementsByClassName("physical");
-physical[0].addEventListener("click", function () {
-  scene.traverse(function (mesh) {
-    const material = new MeshPhysicalMaterial({
-      color: property.color,
-      wireframe: property.wireframe,
-      vertexColors: property.vertexColors,
-      fog: property.fog,
-      emissive: property.emissive,
-      metalness: property.metalness,
-      ior: property.ior,
-      reflectivity: property.reflectivity,
-      iridescence: property.iridescence,
-      iridescenceIOR: property.iridescenceIOR,
-      sheen: property.sheen,
-      sheenRoughness: property.sheenRoughness,
-      sheenColor: property.sheenColor,
-      clearcoat: property.clearcoat,
-      clearcoatRoughness: property.clearcoatRoughness,
-      specularColor: property.specularColor,
-      flatShading: property.flatShading,
+document.addEventListener("DOMContentLoaded", function () {
+  const basicMaterialButton = document.querySelector(".basic.type");
+  const depthMaterialButton = document.querySelector(".depth.type");
+  const distanceMaterialButton = document.querySelector(".distance.type");
+  const lambertMaterialButton = document.querySelector(".lambert.type");
+  const matcapMaterialButton = document.querySelector(".matcap.type");
+  const normalMaterialButton = document.querySelector(".normal.type");
+  const phongMaterialButton = document.querySelector(".phong.type");
+  const physicalMaterialButton = document.querySelector(".physical.type");
+  const standardMaterialButton = document.querySelector(".standard.type");
+  const toonMaterialButton = document.querySelector(".toon.type");
 
-      // envMaps: reflection,
-      // map: bricks,
-      // alphaMap: fibers,
-      // combine: THREE.MultiplyOperation,
+  const properties = document.querySelectorAll(".properties > div");
+
+  basicMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (
+        propertyTitle === "color" ||
+        propertyTitle === "wireframe" ||
+        propertyTitle === "vertexColor" ||
+        propertyTitle === "fog" ||
+        propertyTitle === "map" ||
+        propertyTitle === "alphaMap" ||
+        propertyTitle === "reflectivity" ||
+        propertyTitle === "refractionratio" ||
+        propertyTitle === "combine"
+      ) {
+        property.style.display = "block";
+        property.classList.add("active");
+      } else {
+        property.style.display = "none";
+      }
     });
-    mesh.material = material;
+    Apply();
   });
+
+  depthMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (propertyTitle === "wireframe" || propertyTitle === "alphamap") {
+        property.style.display = "block";
+        property.classList.add("active");
+      } else {
+        property.style.display = "none";
+      }
+    });
+    Apply();
+  });
+
+  distanceMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (
+        propertyTitle === "fog" ||
+        propertyTitle === "map" ||
+        propertyTitle === "alphaMap"
+      ) {
+        property.style.display = "block";
+        property.classList.add("active");
+        // const result = document.querySelector(".active").querySelector("input");
+      } else {
+        property.style.display = "none";
+      }
+    });
+    Apply();
+  });
+
+  lambertMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (
+        propertyTitle === "color" ||
+        propertyTitle === "emissive" ||
+        propertyTitle === "wireframe" ||
+        propertyTitle === "vertexColor" ||
+        propertyTitle === "map" ||
+        propertyTitle === "alphaMap" ||
+        propertyTitle === "combine" ||
+        propertyTitle === "reflectivity" ||
+        propertyTitle === "refractionratio"
+      ) {
+        property.classList.add("active");
+        property.style.display = "block";
+      } else {
+        property.style.display = "none";
+      }
+    });
+    Apply();
+  });
+
+  matcapMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (
+        propertyTitle === "color" ||
+        propertyTitle === "flatShading" ||
+        propertyTitle === "matCap" ||
+        propertyTitle === "alphaMap"
+      ) {
+        property.classList.add("active");
+        property.style.display = "block";
+      } else {
+        property.style.display = "none";
+      }
+    });
+    Apply();
+  });
+
+  normalMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (propertyTitle === "flatShading" || propertyTitle === "wireframe") {
+        property.classList.add("active");
+        property.style.display = "block";
+      } else {
+        property.style.display = "none";
+      }
+    });
+    Apply();
+  });
+
+  phongMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (
+        propertyTitle === "color" ||
+        propertyTitle === "emissive" ||
+        propertyTitle === "specular" ||
+        propertyTitle === "shininess" ||
+        propertyTitle === "flatShading" ||
+        propertyTitle === "wireframe" ||
+        propertyTitle === "vertexColor" ||
+        propertyTitle === "fog" ||
+        propertyTitle === "map" ||
+        propertyTitle === "alphamap" ||
+        propertyTitle === "combine" ||
+        propertyTitle === "reflectivity" ||
+        propertyTitle === "refractionratio"
+      ) {
+        property.classList.add("active");
+        property.style.display = "block";
+      } else {
+        property.style.display = "none";
+      }
+    });
+    Apply();
+  });
+
+  physicalMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property.querySelector(".property_title").innerText;
+      property.classList.remove("active");
+      if (
+        propertyTitle === "color" ||
+        propertyTitle === "emissive" ||
+        propertyTitle === "roughness" ||
+        propertyTitle === "metalness" ||
+        propertyTitle === "ior" ||
+        propertyTitle === "reflectivity" ||
+        propertyTitle === "iridescence" ||
+        propertyTitle === "iridescenceIOR" ||
+        propertyTitle === "sheen" ||
+        propertyTitle === "sheenroughness" ||
+        propertyTitle === "sheenColor" ||
+        propertyTitle === "clearcoat" ||
+        propertyTitle === "clearcoatRoughness" ||
+        propertyTitle === "specularIntensity" ||
+        propertyTitle === "specularColor" ||
+        propertyTitle === "flatShading" ||
+        propertyTitle === "wireframe" ||
+        propertyTitle === "vertexColor" ||
+        propertyTitle === "fog" ||
+        propertyTitle === "specular" ||
+        propertyTitle === "shininess" ||
+        propertyTitle === "map" ||
+        propertyTitle === "alphamap" ||
+        propertyTitle === "metalnessMap" ||
+        propertyTitle === "iridescenceMap"
+      ) {
+        property.classList.add("active");
+        property.style.display = "block";
+      } else {
+        property.style.display = "none";
+      }
+    });
+    Apply();
+  });
+
+  standardMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (
+        propertyTitle === "color" ||
+        propertyTitle === "emissive" ||
+        propertyTitle === "roughness" ||
+        propertyTitle === "metalness" ||
+        propertyTitle === "flatshading" ||
+        propertyTitle === "wireframe" ||
+        propertyTitle === "vertexcolor" ||
+        propertyTitle === "fog" ||
+        propertyTitle === "map" ||
+        propertyTitle === "alphamap" ||
+        propertyTitle === "roughnessMap" ||
+        propertyTitle === "metalnessMap"
+      ) {
+        property.classList.add("active");
+        property.style.display = "block";
+      } else {
+        property.style.display = "none";
+      }
+    });
+  });
+
+  toonMaterialButton.addEventListener("click", function () {
+    properties.forEach(function (property) {
+      const propertyTitle = property
+        .querySelector(".property_title")
+        .innerText.toLowerCase();
+      property.classList.remove("active");
+      if (
+        propertyTitle === "color" ||
+        propertyTitle === "map" ||
+        propertyTitle === "alphamap"
+      ) {
+        property.classList.add("active");
+        property.style.display = "block";
+      } else {
+        property.style.display = "none";
+      }
+    });
+  });
+  Apply();
 });
-
-// var lambert = document.getElementsByClassName("lambert");
-// lambert[0].addEventListener("click", function () {
-//   scene.traverse(function (mesh) {
-//     const material = new MeshLambertMaterial({
-//       color: property.color,
-//       wireframe: property.wireframe,
-//       vertexColors: property.vertexColors,
-//       fog: property.fog,
-//       // envMaps: reflection,
-//       // map: bricks,
-//       // alphaMap: fibers,
-//       // combine: THREE.MultiplyOperation,
-//       reflectivity: property.reflectivity,
-//       refractionRatio: property.refractionRatio,
-//     });
-//     mesh.material = material;
-//   });
-// });
-
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
@@ -193,9 +373,64 @@ function animate() {
   stats.end();
 }
 
-//
+function Apply() {
+  const materialData = {};
+  const actives = document.querySelectorAll(".active");
+  const combine = document.getElementById("combine").value;
 
-// const reflection = textureLoader.load("/texture/px.jpg");
+  actives.forEach(function (active) {
+    const select = active.querySelector("input");
+    let porcelainWhite = {};
+    let value = "";
+    let idName = "";
+    let fileURL = "";
+    if (select == null) {
+      value = combine;
+      idName = document.querySelector("select").getAttribute("id");
+    } else if (select.getAttribute("type") == "checkbox") {
+      value = select.checked;
+      idName = active.querySelector("input").getAttribute("id");
+    } else if (select.getAttribute("type") == "file") {
+      fileURL = getURL(select);
+      if (fileURL == "") {
+        porcelainWhite = null;
+      } else porcelainWhite = textureLoader.load();
+      idName = active.querySelector("input").getAttribute("id");
+    } else {
+      value = select.value;
+      idName = active.querySelector("input").getAttribute("id");
+    }
+    if (value == "") materialData[idName] = porcelainWhite;
+    else materialData[idName] = value;
+  });
+  console.log(materialData);
+  scene.traverse(function (mesh) {
+    const material = new MeshBasicMaterial(materialData);
+    mesh.material = material;
+  });
+}
+
+var apply = document.getElementById("button");
+
+apply.addEventListener("click", () => {
+  Apply();
+});
+async function getURL(fileInput) {
+  let fileURL = "";
+  await fileInput.addEventListener("change", function () {
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+      fileURL = event.target.result;
+    };
+
+    reader.readAsDataURL(file);
+  });
+  console.log(fileURL);
+  return fileURL;
+}
+
 // const reflectivity = textureLoader.load("/texture/nz.jpg");
 // const bricks = textureLoader.load("/texture/brick_roughness.jpg");
 // const fibers = textureLoader.load("/texture/alphaMap.jpg");
