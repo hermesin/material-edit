@@ -19,6 +19,74 @@ import Stats from "three/addons/libs/stats.module.js";
 let camera, renderer, scene, mesh;
 let stats, container, controls;
 let geometry = new THREE.TorusKnotGeometry(9, 4, 75, 10);
+var MapUrl = "", AlphaMapUrl = '', MatCapUrl = '', RoughnessMapUrl = '', MetalnessMapUrl = '', IridescenceMapUrl = '';
+const map = document.getElementById('map');
+const alphaMap = document.getElementById('alphaMap');
+const matcap = document.getElementById('matcap');
+const roughnessMap = document.getElementById('roughnessMap');
+const metalnessMap = document.getElementById('metalnessMap');
+const iridescenceMap = document.getElementById('iridescenceMap');
+map.addEventListener("change", async function () {
+  const file = map.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function (event) {
+    MapUrl = event.target.result;
+  };
+  
+  reader.readAsDataURL(file);
+});
+alphaMap.addEventListener("change", async function () {
+  const file = alphaMap.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function (event) {
+    AlphaMapUrl = event.target.result;
+  };
+  
+  reader.readAsDataURL(file);
+});
+matcap.addEventListener("change", async function () {
+  const file = matcap.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function (event) {
+    MatCapUrl = event.target.result;
+  };
+  
+  reader.readAsDataURL(file);
+});
+roughnessMap.addEventListener("change", async function () {
+  const file = roughnessMap.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function (event) {
+    RoughnessMapUrl = event.target.result;
+  };
+  
+  reader.readAsDataURL(file);
+});
+metalnessMap.addEventListener("change", async function () {
+  const file = metalnessMap.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function (event) {
+    MetalnessMapUrl = event.target.result;
+  };
+  
+  reader.readAsDataURL(file);
+});
+iridescenceMap.addEventListener("change", async function () {
+  const file = iridescenceMap.files[0];
+  const reader = new FileReader();
+  
+  reader.onload = function (event) {
+    IridescenceMapUrl = event.target.result;
+  };
+  
+  reader.readAsDataURL(file);
+});
+
 init();
 animate();
 
@@ -383,7 +451,6 @@ function Apply() {
     let porcelainWhite = {};
     let value = "";
     let idName = "";
-    let fileURL = "";
     if (select == null) {
       value = combine;
       idName = document.querySelector("select").getAttribute("id");
@@ -391,11 +458,15 @@ function Apply() {
       value = select.checked;
       idName = active.querySelector("input").getAttribute("id");
     } else if (select.getAttribute("type") == "file") {
-      fileURL = getURL(select);
-      if (fileURL == "") {
-        porcelainWhite = null;
-      } else porcelainWhite = textureLoader.load();
+      console.log(select);
       idName = active.querySelector("input").getAttribute("id");
+      if(!select.hasAttribute('data-sider-select-id')) porcelainWhite = null;
+      else if(idName == 'map') porcelainWhite = textureLoader.load(MapUrl);
+      else if(idName =='alphaMap') porcelainWhite = textureLoader.load(AlphaMapUrl);
+      else if(idName == 'matcap') porcelainWhite = textureLoader.load(MatCapUrl);
+      else if(idName == 'roughnessMap') porcelainWhite = textureLoader.load(RoughnessMapUrl);
+      else if(idName == 'metalnessMap') porcelainWhite = textureLoader.load(MetalnessMapUrl);
+      else porcelainWhite = textureLoader.load(IridescenceMapUrl);
     } else {
       value = select.value;
       idName = active.querySelector("input").getAttribute("id");
@@ -403,7 +474,7 @@ function Apply() {
     if (value == "") materialData[idName] = porcelainWhite;
     else materialData[idName] = value;
   });
-  console.log(materialData);
+
   scene.traverse(function (mesh) {
     const material = new MeshBasicMaterial(materialData);
     mesh.material = material;
@@ -415,21 +486,22 @@ var apply = document.getElementById("button");
 apply.addEventListener("click", () => {
   Apply();
 });
-async function getURL(fileInput) {
-  let fileURL = "";
-  await fileInput.addEventListener("change", function () {
-    const file = fileInput.files[0];
-    const reader = new FileReader();
 
-    reader.onload = function (event) {
-      fileURL = event.target.result;
-    };
+// function getURL(fileInput) {
+//   let fileURL = "";
+//   fileInput.addEventListener("change", async function () {
+//     const file = fileInput.files[0];
+//     const reader = new FileReader();
+    
+//     reader.onload = function (event) {
+//       fileURL = event.target.result;
+//     };
+    
+//     reader.readAsDataURL(file);
+//   });
 
-    reader.readAsDataURL(file);
-  });
-  console.log(fileURL);
-  return fileURL;
-}
+//   return fileURL;
+// }
 
 // const reflectivity = textureLoader.load("/texture/nz.jpg");
 // const bricks = textureLoader.load("/texture/brick_roughness.jpg");
