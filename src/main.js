@@ -345,8 +345,8 @@ document.addEventListener("DOMContentLoaded", function () {
         property.style.display = "none";
       }
     });
+    Apply();
   });
-  Apply();
 });
 function onWindowResize() {
   camera.aspect = window.innerWidth / window.innerHeight;
