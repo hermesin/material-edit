@@ -189,25 +189,25 @@ body {
   left: 130px;
 }
 
-#flatshading {
+#flatShading {
   position: relative;
   width: 20px;
   height: 20px;
-  left: 122px;
+  left: 118px;
 }
 
 #fog {
   position: relative;
   width: 20px;
   height: 20px;
-  left: 209px;
+  left: 212px;
 }
 
-#vertexColor {
+#vertexColors {
   position: relative;
   width: 20px;
   height: 20px;
-  left: 112px;
+  left: 105px;
 }
 
 #reflectivity {
@@ -342,7 +342,7 @@ body {
   border: none;
 }
 
-#specularintensity {
+#specularIntensity {
   color: rgb(108, 110, 112);
   text-align: center;
   position: relative;
@@ -364,7 +364,7 @@ body {
   border: none;
 }
 
-#alphamap {
+#alphaMap {
   position: relative;
   left: 15px;
   width: 163px;
