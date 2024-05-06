@@ -16,74 +16,80 @@ import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import { RGBELoader } from "three/addons/loaders/RGBELoader.js";
 import Stats from "three/addons/libs/stats.module.js";
 
-let camera, renderer, scene, mesh;
+let camera, renderer, scene, mesh, material;
 let stats, container, controls;
+var materialName = "";
 let geometry = new THREE.TorusKnotGeometry(9, 4, 75, 10);
-var MapUrl = "", AlphaMapUrl = '', MatCapUrl = '', RoughnessMapUrl = '', MetalnessMapUrl = '', IridescenceMapUrl = '';
-const map = document.getElementById('map');
-const alphaMap = document.getElementById('alphaMap');
-const matcap = document.getElementById('matcap');
-const roughnessMap = document.getElementById('roughnessMap');
-const metalnessMap = document.getElementById('metalnessMap');
-const iridescenceMap = document.getElementById('iridescenceMap');
+var MapUrl = "",
+  AlphaMapUrl = "",
+  MatCapUrl = "",
+  RoughnessMapUrl = "",
+  MetalnessMapUrl = "",
+  IridescenceMapUrl = "";
+const map = document.getElementById("map");
+const alphaMap = document.getElementById("alphaMap");
+const matcap = document.getElementById("matcap");
+const roughnessMap = document.getElementById("roughnessMap");
+const metalnessMap = document.getElementById("metalnessMap");
+const iridescenceMap = document.getElementById("iridescenceMap");
 map.addEventListener("change", async function () {
   const file = map.files[0];
   const reader = new FileReader();
-  
+
   reader.onload = function (event) {
     MapUrl = event.target.result;
   };
-  
+
   reader.readAsDataURL(file);
 });
 alphaMap.addEventListener("change", async function () {
   const file = alphaMap.files[0];
   const reader = new FileReader();
-  
+
   reader.onload = function (event) {
     AlphaMapUrl = event.target.result;
   };
-  
+
   reader.readAsDataURL(file);
 });
 matcap.addEventListener("change", async function () {
   const file = matcap.files[0];
   const reader = new FileReader();
-  
+
   reader.onload = function (event) {
     MatCapUrl = event.target.result;
   };
-  
+
   reader.readAsDataURL(file);
 });
 roughnessMap.addEventListener("change", async function () {
   const file = roughnessMap.files[0];
   const reader = new FileReader();
-  
+
   reader.onload = function (event) {
     RoughnessMapUrl = event.target.result;
   };
-  
+
   reader.readAsDataURL(file);
 });
 metalnessMap.addEventListener("change", async function () {
   const file = metalnessMap.files[0];
   const reader = new FileReader();
-  
+
   reader.onload = function (event) {
     MetalnessMapUrl = event.target.result;
   };
-  
+
   reader.readAsDataURL(file);
 });
 iridescenceMap.addEventListener("change", async function () {
   const file = iridescenceMap.files[0];
   const reader = new FileReader();
-  
+
   reader.onload = function (event) {
     IridescenceMapUrl = event.target.result;
   };
-  
+
   reader.readAsDataURL(file);
 });
 
@@ -113,13 +119,8 @@ function init() {
   scene.background = new THREE.Color("#444444");
   scene.environment.mapping = THREE.EquirectangularReflectionMapping;
 
-  // const directionalLight = new THREE.DirectionalLight(0xffffff, 0.5);
-  // directionalLight.position.set(1, 1, 1);
-  // scene.add(directionalLight);
-
-  const material = new MeshBasicMaterial({ color: "white" });
+  material = new MeshBasicMaterial({ color: "white" });
   mesh = new THREE.Mesh(geometry, material);
-  mesh.name = "torus";
   scene.add(mesh);
 
   renderer = new THREE.WebGLRenderer();
@@ -181,7 +182,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (
         propertyTitle === "color" ||
         propertyTitle === "wireframe" ||
-        propertyTitle === "vertexColor" ||
+        propertyTitle === "vertexColors" ||
         propertyTitle === "fog" ||
         propertyTitle === "map" ||
         propertyTitle === "alphaMap" ||
@@ -237,15 +238,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
   lambertMaterialButton.addEventListener("click", function () {
     properties.forEach(function (property) {
-      const propertyTitle = property
-        .querySelector(".property_title")
-        .innerText.toLowerCase();
+      const propertyTitle = property.querySelector(".property_title").innerText;
       property.classList.remove("active");
       if (
         propertyTitle === "color" ||
         propertyTitle === "emissive" ||
         propertyTitle === "wireframe" ||
-        propertyTitle === "vertexColor" ||
+        propertyTitle === "vertexColors" ||
         propertyTitle === "map" ||
         propertyTitle === "alphaMap" ||
         propertyTitle === "combine" ||
@@ -258,14 +257,13 @@ document.addEventListener("DOMContentLoaded", function () {
         property.style.display = "none";
       }
     });
+    materialName = lambertMaterialButton.textContent.trim();
     Apply();
   });
 
   matcapMaterialButton.addEventListener("click", function () {
     properties.forEach(function (property) {
-      const propertyTitle = property
-        .querySelector(".property_title")
-        .innerText.toLowerCase();
+      const propertyTitle = property.querySelector(".property_title").innerText;
       property.classList.remove("active");
       if (
         propertyTitle === "color" ||
@@ -279,14 +277,13 @@ document.addEventListener("DOMContentLoaded", function () {
         property.style.display = "none";
       }
     });
+    materialName = matcapMaterialButton.textContent.trim();
     Apply();
   });
 
   normalMaterialButton.addEventListener("click", function () {
     properties.forEach(function (property) {
-      const propertyTitle = property
-        .querySelector(".property_title")
-        .innerText.toLowerCase();
+      const propertyTitle = property.querySelector(".property_title").innerText;
       property.classList.remove("active");
       if (propertyTitle === "flatShading" || propertyTitle === "wireframe") {
         property.classList.add("active");
@@ -300,9 +297,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   phongMaterialButton.addEventListener("click", function () {
     properties.forEach(function (property) {
-      const propertyTitle = property
-        .querySelector(".property_title")
-        .innerText.toLowerCase();
+      const propertyTitle = property.querySelector(".property_title").innerText;
       property.classList.remove("active");
       if (
         propertyTitle === "color" ||
@@ -311,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
         propertyTitle === "shininess" ||
         propertyTitle === "flatShading" ||
         propertyTitle === "wireframe" ||
-        propertyTitle === "vertexColor" ||
+        propertyTitle === "vertexColors" ||
         propertyTitle === "fog" ||
         propertyTitle === "map" ||
         propertyTitle === "alphamap" ||
@@ -350,12 +345,12 @@ document.addEventListener("DOMContentLoaded", function () {
         propertyTitle === "specularColor" ||
         propertyTitle === "flatShading" ||
         propertyTitle === "wireframe" ||
-        propertyTitle === "vertexColor" ||
+        propertyTitle === "vertexColors" ||
         propertyTitle === "fog" ||
         propertyTitle === "specular" ||
         propertyTitle === "shininess" ||
-        propertyTitle === "map" ||
-        propertyTitle === "alphamap" ||
+        propertyTitle === "Map" ||
+        propertyTitle === "alphaMap" ||
         propertyTitle === "metalnessMap" ||
         propertyTitle === "iridescenceMap"
       ) {
@@ -370,21 +365,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
   standardMaterialButton.addEventListener("click", function () {
     properties.forEach(function (property) {
-      const propertyTitle = property
-        .querySelector(".property_title")
-        .innerText.toLowerCase();
+      const propertyTitle = property.querySelector(".property_title").innerText;
       property.classList.remove("active");
       if (
         propertyTitle === "color" ||
         propertyTitle === "emissive" ||
         propertyTitle === "roughness" ||
         propertyTitle === "metalness" ||
-        propertyTitle === "flatshading" ||
+        propertyTitle === "flatShading" ||
         propertyTitle === "wireframe" ||
-        propertyTitle === "vertexcolor" ||
+        propertyTitle === "vertexColors" ||
         propertyTitle === "fog" ||
-        propertyTitle === "map" ||
-        propertyTitle === "alphamap" ||
+        propertyTitle === "Map" ||
+        propertyTitle === "alphaMap" ||
         propertyTitle === "roughnessMap" ||
         propertyTitle === "metalnessMap"
       ) {
@@ -458,14 +451,17 @@ function Apply() {
       value = select.checked;
       idName = active.querySelector("input").getAttribute("id");
     } else if (select.getAttribute("type") == "file") {
-      console.log(select);
       idName = active.querySelector("input").getAttribute("id");
-      if(!select.hasAttribute('data-sider-select-id')) porcelainWhite = null;
-      else if(idName == 'map') porcelainWhite = textureLoader.load(MapUrl);
-      else if(idName =='alphaMap') porcelainWhite = textureLoader.load(AlphaMapUrl);
-      else if(idName == 'matcap') porcelainWhite = textureLoader.load(MatCapUrl);
-      else if(idName == 'roughnessMap') porcelainWhite = textureLoader.load(RoughnessMapUrl);
-      else if(idName == 'metalnessMap') porcelainWhite = textureLoader.load(MetalnessMapUrl);
+      if (!select.hasAttribute("data-sider-select-id")) porcelainWhite = null;
+      else if (idName == "map") porcelainWhite = textureLoader.load(MapUrl);
+      else if (idName == "alphaMap")
+        porcelainWhite = textureLoader.load(AlphaMapUrl);
+      else if (idName == "matcap")
+        porcelainWhite = textureLoader.load(MatCapUrl);
+      else if (idName == "roughnessMap")
+        porcelainWhite = textureLoader.load(RoughnessMapUrl);
+      else if (idName == "metalnessMap")
+        porcelainWhite = textureLoader.load(MetalnessMapUrl);
       else porcelainWhite = textureLoader.load(IridescenceMapUrl);
     } else {
       value = select.value;
@@ -476,7 +472,17 @@ function Apply() {
   });
 
   scene.traverse(function (mesh) {
-    const material = new MeshBasicMaterial(materialData);
+    let material = {};
+    if (materialName == "") {
+      material = new MeshBasicMaterial(materialData);
+    } else if(materialName == 'MeshLambertMaterial') {
+      material = new MeshLambertMaterial(materialData);
+    } else if(materialName == 'MeshMatcapMaterial') {
+      material = new MeshMatcapMaterial(materialData);
+    }
+    // if(material == 'MeshLambertMaterial') {
+    //   material = new MeshLambertMaterial(materialData);
+    // } else material = new MeshBasicMaterial(materialData)
     mesh.material = material;
   });
 }
@@ -492,11 +498,11 @@ apply.addEventListener("click", () => {
 //   fileInput.addEventListener("change", async function () {
 //     const file = fileInput.files[0];
 //     const reader = new FileReader();
-    
+
 //     reader.onload = function (event) {
 //       fileURL = event.target.result;
 //     };
-    
+
 //     reader.readAsDataURL(file);
 //   });
 
